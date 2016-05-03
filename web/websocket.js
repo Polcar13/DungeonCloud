@@ -1,5 +1,5 @@
 window.onload = init;
-var socket = new WebSocket("ws://192.168.43.103:8080/WebsocketHome/actions");
+var socket = new WebSocket("http://192.168.43.103:8080/WebsocketHome/actions");
 socket.onmessage = onMessage;
 socket.onopen = onOpen;
 
@@ -12,7 +12,6 @@ function onMessage(event) {
 
     switch (message.action) {
         case "addUser":
-            console.log('envia user');
             printUserElement(message);
             break;
         case "remove":
@@ -31,14 +30,12 @@ function onMessage(event) {
 }
 
 function addUser(name, status) {
-
     var Action = {
         action: "addUser",
         name: name,
         status: status
     };
     socket.send(JSON.stringify(Action));
-        console.log('enviem adduser');
 }
 
 function removeUser(element) {
@@ -60,7 +57,6 @@ function toggleUser(element) {
 }
 
 function printUserElement(user) {
-    console.log('entra PrintUserElement');
     var content = document.getElementById("content");
 
     var userDiv = document.createElement("div");
@@ -75,9 +71,31 @@ function printUserElement(user) {
 
     var userStatus = document.createElement("span");
     if (user.status === "On") {
-        userStatus.innerHTML = "<b>Status:</b> " + user.status + " (<a href=\"#\" OnClick=toggleUser(" + user.id + ")>Turn off</a>)";
+        userStatus.innerHTML =
+                '<div class="list-group lg-alt">' +
+                '<a class="list-group-item media" href="">' +
+                '<div class="pull-left">' +
+                '<img src="img/bag-on-head.png" alt="" class="img-avatar">' +
+                '</div>' +
+                '<div class="media-body">' +
+                '<small class="list-group-item-heading">Davil Parnell</small>' +
+                '<small class="list-group-item-text c-gray"><i class="fa fa-circle text-success"></i>Online</small>' +
+                '</div>' +
+                '</a>' +
+                '</div>';
     } else if (user.status === "Off") {
-        userStatus.innerHTML = "<b>Status:</b> " + user.status + " (<a href=\"#\" OnClick=toggleUser(" + user.id + ")>Turn on</a>)";
+        userStatus.innerHTML =
+                '<div class="list-group lg-alt">' +
+                '<a class="list-group-item media" href="">' +
+                '<div class="pull-left">' +
+                '<img src="img/bag-on-head.png" alt="" class="img-avatar">' +
+                '</div>' +
+                '<div class="media-body">' +
+                '<small class="list-group-item-heading">Davil Parnell</small>' +
+                '<small class="list-group-item-text c-gray"><i class="fa fa-circle text-danger"></i>Offline</small>' +
+                '</div>' +
+                '</a>' +
+                '</div>';
     }
     userDiv.appendChild(userStatus);
 
@@ -97,8 +115,8 @@ function hideForm() {
 
 function formSubmit() {
     var form = document.getElementById("addUserForm");
-    var name = form.elements["user_name"].value;
-    var status = form.elements["user_status"].value;
+    var name = form.elements["userName"].value;
+    var status = form.elements["userStatus"].value;
     hideForm();
     document.getElementById("addUserForm").reset();
     addUser(name, status);
