@@ -41,8 +41,14 @@
                         </div>
 
                         <div class="pull-left hidden-xs">
+                            <img src="img/group.png" alt="" class="img-avatar m-r-10">
+                            <div class="lv-avatar pull-left"></div>
+                            <span>&nbsp;<em>PartyName</em></span>
+                        </div>
+
+                        <div class="pull-left hidden-xs">
                             <div id="addDevice">
-                                <form id="addDeviceForm">
+                                <form id="addUserForm">
                                     <span>Name: <input type="text" name="device_name" id="user_name"></span>
                                     <span>Type: 
                                         <select id="user_type">
@@ -51,7 +57,6 @@
                                         </select></span>
 
                                     <input type="button" class="button" value="Add" onclick="formSubmit()">
-                                    <input type="reset" class="button" value="Cancel" onclick="hideForm()">
                                 </form>
                             </div>
                         </div>
@@ -171,16 +176,18 @@
             </div>
         </div>
         <script src="js/jquery-1.12.3.min.js"></script>
+        <script src="js/websocket.js"></script>
+        <script src="js/jCoverFlip.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script type="text/javascript">
+        <script type="text/javascript" >
 
-            $(function () {
-                if ($('#ms-menu-trigger')[0]) {
-                    $('body').on('click', '#ms-menu-trigger', function () {
-                        $('.ms-menu').toggleClass('toggled');
-                    });
-                }
-            });
+                                        $(function () {
+                                            if ($('#ms-menu-trigger')[0]) {
+                                                $('body').on('click', '#ms-menu-trigger', function () {
+                                                    $('.ms-menu').toggleClass('toggled');
+                                                });
+                                            }
+                                        });
 
         </script>
     </body>
